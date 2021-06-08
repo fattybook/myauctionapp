@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <ul>
+        
+         {% for auction in auctions %}
+            {% if not auction.winner %}
+            <ul>
+                <div class="row">
+                    <div class="col-sm-4" >
+                        <img class="col align-self-start" src= "{{ auction.image }}" alt="Auction image" style="width: 18rem;">
+                    </div>
+                    <div class="col-sm-8">
+                        <h3 class="card-title" >
+                            <a href="{% url 'listing' auction.id %}">{{ auction.title }}</a>
+                        </h3>
+                        <h5 class="card-text" >Price: {{ auction.highest_bid }}</h5>
+                        <br>
+                        <h5 class="card-text">{{ auction.description }}</h5>
+                        <p class="card-text"><small class="text-muted">---Created on: {{ auction.created_date }}</small></p>
+                        <p class="card-text"><small class="text-muted">---Created by: {{ auction.creator }}</small></p>  
+                    </div>
+                </div>                 
+            </ul>   
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
